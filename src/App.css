@@ -1,0 +1,339 @@
+:root {
+  --blue-main: #1400e6;
+  --blue-dark: #0d00b9;
+  --grid-color: rgba(7, 0, 70, 0.42);
+  --text-light: #f5f5ef;
+}
+
+.page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at center, #2618ff 0%, var(--blue-main) 42%, var(--blue-dark) 100%);
+  color: var(--text-light);
+}
+
+/* фон-сетка */
+
+.background-grid {
+  position: absolute;
+  inset: -20%;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 95px 95px;
+  transform: perspective(800px) rotateX(8deg) scale(1.3);
+  transform-origin: center;
+}
+
+/* header / footer */
+
+.header {
+  position: absolute;
+  top: 28px;
+  left: 34px;
+  right: 34px;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.brand {
+  color:#ec6809;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.controls {
+  color:#ec6809;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.75;
+  text-align: right;
+}
+
+.footer {
+  position: absolute;
+  left: 34px;
+  right: 34px;
+  bottom: 24px;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* 3d-сцена */
+
+.scene {
+  position: absolute;
+  inset: 0;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  transform-style: preserve-3d;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+body.is-dragging,
+body.is-dragging .scene {
+  cursor: grabbing;
+}
+
+body.is-dragging * {
+  user-select: none;
+}
+
+.world {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* карточки */
+
+.project {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 380px;
+  height: 290px;
+  transform-style: preserve-3d;
+  text-decoration: none;
+  color: inherit;
+  will-change: transform;
+}
+
+.project__face {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.project__content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #d8d8d8;
+  box-shadow:
+    0 30px 70px rgba(0, 0, 0, 0.24),
+    0 0 0 1px rgba(255, 255, 255, 0.12);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.project:hover .project__content {
+  transform: translateY(-10px) scale(1.04);
+  box-shadow:
+    0 45px 100px rgba(0, 0, 0, 0.36),
+    0 0 0 1px rgba(255, 255, 255, 0.22);
+}
+
+.project img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition:
+    transform 0.5s ease,
+    filter 0.35s ease;
+}
+
+.project:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.72);
+}
+
+.project__overlay {
+  position: absolute;
+  inset: 0;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.08),
+      rgba(0, 0, 0, 0.78)
+    );
+}
+
+.project__number {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+}
+
+.project__info h2 {
+  margin: 0 0 6px;
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.05;
+}
+
+.project__info p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.82;
+  line-height: 1.35;
+}
+
+/* центральная 3d-фигура */
+
+.chrome-object {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 360px;
+  height: 360px;
+  margin-left: -180px;
+  margin-top: -180px;
+  transform-style: preserve-3d;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.chrome-object__ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 26px solid transparent;
+  background:
+    linear-gradient(
+      125deg,
+      #323232 0%,
+      #ffffff 16%,
+      #9d9d9d 32%,
+      #f9f9f9 50%,
+      #626262 68%,
+      #ffffff 86%,
+      #252525 100%
+    )
+    border-box;
+  mask:
+    linear-gradient(#000 0 0) padding-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.16);
+}
+
+.ring-1 {
+  width: 360px;
+  height: 360px;
+  transform: translate(-50%, -50%) rotateX(74deg) rotateZ(8deg);
+}
+
+.ring-2 {
+  width: 300px;
+  height: 300px;
+  transform: translate(-50%, -50%) rotateY(68deg) rotateZ(-24deg);
+}
+
+.ring-3 {
+  width: 235px;
+  height: 235px;
+  transform: translate(-50%, -50%) rotateX(48deg) rotateY(40deg);
+}
+
+.ring-4 {
+  width: 170px;
+  height: 170px;
+  transform: translate(-50%, -50%) rotateX(-58deg) rotateY(28deg);
+}
+
+/* надпись по большой дуге */
+
+.chrome-object__title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 360px;
+  height: 360px;
+  transform: translate(-50%, -50%) translateZ(36px);
+  overflow: visible;
+}
+
+.chrome-object__title text {
+  fill: #ec6809;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* адаптив */
+
+@media (max-width: 900px) {
+  .project {
+    width: 220px;
+    height: 290px;
+  }
+
+  .chrome-object {
+    width: 260px;
+    height: 260px;
+    margin-left: -130px;
+    margin-top: -130px;
+  }
+
+  .ring-1 {
+    width: 260px;
+    height: 260px;
+  }
+
+  .ring-2 {
+    width: 215px;
+    height: 215px;
+  }
+
+  .ring-3 {
+    width: 170px;
+    height: 170px;
+  }
+
+  .ring-4 {
+    width: 120px;
+    height: 120px;
+  }
+
+  .chrome-object__title {
+    width: 260px;
+    height: 260px;
+  }
+
+  .chrome-object__title text {
+    font-size: 18px;
+  }
+
+  .header,
+  .footer {
+    left: 20px;
+    right: 20px;
+  }
+}
