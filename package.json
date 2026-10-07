@@ -1,23 +1,11 @@
 {
-  "name": "classworks",
+  "name": "classworks-workspace",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "oxlint",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
-  },
-  "devDependencies": {
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
-    "oxlint": "^1.81.0",
-    "vite": "^8.3.0"
+    "prepare:homeworks": "npm --prefix wheel-of-fortune run build && node scripts/copy-homeworks.mjs",
+    "dev": "npm run prepare:homeworks && npm --prefix site run dev",
+    "build": "npm run prepare:homeworks && npm --prefix site run build",
+    "preview": "npm --prefix site run preview"
   }
 }

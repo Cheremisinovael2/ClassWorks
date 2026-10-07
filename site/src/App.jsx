@@ -6,15 +6,15 @@ const projects = [
     id: 1,
     title: 'Random Number Generator',
     description: 'Генератор случайных чисел',
-    image: '/ClassWorks/covers/random-number-generator.png',
-    link: '/ClassWorks/random-number-generator/',
+    image: `${import.meta.env.BASE_URL}covers/random-number-generator.png`,
+    link: `${import.meta.env.BASE_URL}random-number-generator/index.html`,
   },
   {
     id: 2,
     title: 'Wheel of Fortune',
     description: 'Пойти на пары, не пойти или зеро?',
-    image: '/ClassWorks/covers/wheel-of-fortune.png',
-    link: '/ClassWorks/wheel-of-fortune/',
+    image: `${import.meta.env.BASE_URL}covers/wheel-of-fortune.png`,
+    link: `${import.meta.env.BASE_URL}wheel-of-fortune/index.html`,
   },
 ]
 
